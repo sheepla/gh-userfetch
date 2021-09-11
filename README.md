@@ -20,3 +20,12 @@ Requires [GitHub CLI](https://github.com/cli/cli) and [stedolan/jq](https://gith
 ```bash
 gh extension install sheepla/gh-userfetch
 ```
+
+## TODO
+
+- [ ] configureable color
+- [ ] show profile image instead of octocat logo
+
+## Contributing
+
+Welcome!
