@@ -15,7 +15,7 @@ Just run `gh userfetch` but needs authentication with GitHub host: `gh auth logi
 
 ## Installation
 
-Install [GitHub CLI](https://github.com/cli/cli), then run below.
+Requires [GitHub CLI](https://github.com/cli/cli) and [stedolan/jq](https://github.com/stedolan/jq).
 
 ```bash
 gh extension install sheepla/gh-userfetch
