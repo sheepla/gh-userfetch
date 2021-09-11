@@ -1,13 +1,21 @@
-# gh-userfetch
+<div align="right">
+    <img src="https://img.shields.io/static/v1?label=Language&message=Shell&color=blue&style=flat-square"/>
+    <img src="https://img.shields.io/static/v1?label=License&message=MIT&color=blue&style=flat-square"/>
+</div>
 
-An extension for [GitHub CLI](https://github.com/cli/cli) to show your GitHub profile
+# 👨‍💻 gh-userfetch
+
+An extension for [GitHub CLI](https://github.com/cli/cli) to show your GitHub profile inspired by [dylanaraps/neofetch](https://github.com/dylanaraps/neofetch) .
+
+<img src="./screenshot.png" width="80%" />
 
 ## Usage
 
-1. Authenticat with GitHub host: `gh auth login`
-2. run `gh userfetch`
+Just run `gh userfetch` but needs authentication with GitHub host: `gh auth login`.
 
 ## Installation
+
+Install [GitHub CLI](https://github.com/cli/cli), then run below.
 
 ```bash
 gh extension install sheepla/gh-userfetch
