@@ -57,23 +57,23 @@ function _print_info() {
     local userinfo
     userinfo="$(cat /dev/stdin)"
 
-    printf "\n\n"
-    printf "${COLOR_BG_BLACK} %s ${COLOR_NONE} \n" "$(_get_value "login" <<<"${userinfo}")"
-    printf "\n"
+    echo -e "\n\n"
+    echo -e "${COLOR_BG_BLACK} %s ${COLOR_NONE} \n" "$(_get_value "login" <<< "${userinfo}")"
+    echo -e "\n"
 
-    printf " %s\n" "$(_get_value "bio" <<<${userinfo})"
+    echo -e " %s\n" "$(_get_value "bio" <<<${userinfo})"
 
     _print_bar
 
     for k in "${JSON_KEYS[@]}"; do
-        printf "${COLOR_FG_HIGHLIGHT} ${k} \033[m${INDICATOR} $(_get_value "${k}" <<<"${userinfo}")\n"
+        echo -e "${COLOR_FG_HIGHLIGHT} ${k} \033[m${INDICATOR} $(_get_value "${k}" <<<"${userinfo}")\n"
     done
 
     _print_bar
 }
 
 function _print_bar() {
-    printf "${COLOR_FG_BLACK}=================================================${COLOR_NONE}\n"
+    echo -e "${COLOR_FG_BLACK}=================================================${COLOR_NONE}\n"
 }
 
 function _main() {
