@@ -1,0 +1,67 @@
+#!/bin/bash
+
+set -o nounset
+set -o errexit
+
+readonly COLOR_FG_BLACK="\033[30;1m"
+readonly COLOR_NONE="\033[m"
+
+readonly LOGO="
+${COLOR_FG_BLACK}                                          ${COLOR_NONE}
+${COLOR_FG_BLACK}                 !!;;;!!!!                ${COLOR_NONE}
+${COLOR_FG_BLACK}           ;iii!!        !i!ii;           ${COLOR_NONE}
+${COLOR_FG_BLACK}        !VV!                  !VV!        ${COLOR_NONE}
+${COLOR_FG_BLACK}      ;U!                        !U!      ${COLOR_NONE}
+${COLOR_FG_BLACK}     b!                            ib     ${COLOR_NONE}
+${COLOR_FG_BLACK}   ;B     !b!ii!          !Vi!b;     B;   ${COLOR_NONE}
+${COLOR_FG_BLACK}  !b      b    !VV!!;;!!iV;    b      b!  ${COLOR_NONE}
+${COLOR_FG_BLACK}  B       i                    V       b  ${COLOR_NONE}
+${COLOR_FG_BLACK} i!      Vi                    VV      !i ${COLOR_NONE}
+${COLOR_FG_BLACK} U      Vi                      !i      U ${COLOR_NONE}
+${COLOR_FG_BLACK} U      B    Vi!i;!!;;!;!V!iU!   i      U ${COLOR_NONE}
+${COLOR_FG_BLACK} U      b  !B  V!V;    ;U!V  b!  U      U ${COLOR_NONE}
+${COLOR_FG_BLACK} ii     U; U  U;##b    b  !U  b ;V     !i ${COLOR_NONE}
+${COLOR_FG_BLACK}  B      b;!B  b!V!    !V!U  b;;b      B  ${COLOR_NONE}
+${COLOR_FG_BLACK}  !b      iViV!i;        ;iiVVVV      b!  ${COLOR_NONE}
+${COLOR_FG_BLACK}   ;B       !ii!VbUUiibUbV!ii!       B;   ${COLOR_NONE}
+${COLOR_FG_BLACK}     bi                            ib     ${COLOR_NONE}
+${COLOR_FG_BLACK}      ;Ui                        iU;      ${COLOR_NONE}
+${COLOR_FG_BLACK}        !VV!                  !VV!        ${COLOR_NONE}
+${COLOR_FG_BLACK}           ;ii!!!        ii!ii            ${COLOR_NONE}
+${COLOR_FG_BLACK}                 !!;;!;!!                 ${COLOR_NONE}
+${COLOR_FG_BLACK}                                          ${COLOR_NONE}
+"
+
+readonly JSON_KEYS=(
+	"company"
+	"blog"
+	"location"
+	"email"
+	"twitter_username"
+	"public_repos"
+	"public_gists"
+	"followers"
+	"following"
+	"created_at"
+	"updated_at"
+)
+
+userinfo="$(gh api "user")"
+
+function _get_value() {
+	jq -r ".${1}" <<<"${userinfo}"
+}
+
+function _print_info() {
+    echo -e "\n\n"
+
+    printf "\033[36;1m%s\033[m " "$(_get_value "login")"
+    _get_value "bio"
+    echo "=========================================="
+
+	for k in "${JSON_KEYS[@]}"; do
+		echo -e "\033[36;1m ${k} \033[m➤ $(_get_value "${k}") "
+	done
+}
+
+paste <(echo -e "${LOGO}") <(_print_info)
