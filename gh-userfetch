@@ -36,21 +36,21 @@ readonly LOGO="
 "
 
 readonly JSON_KEYS=(
-	"company"
-	"blog"
-	"location"
-	"email"
-	"twitter_username"
-	"public_repos"
-	"public_gists"
-	"followers"
-	"following"
-	"created_at"
-	"updated_at"
+    "company"
+    "blog"
+    "location"
+    "email"
+    "twitter_username"
+    "public_repos"
+    "public_gists"
+    "followers"
+    "following"
+    "created_at"
+    "updated_at"
 )
 
 function _get_value() {
-	jq -r ".${1}" </dev/stdin
+    jq -r ".${1}" </dev/stdin
 }
 
 function _print_info() {
@@ -58,17 +58,16 @@ function _print_info() {
     userinfo="$(cat /dev/stdin)"
 
     printf "\n\n"
-    printf "${COLOR_BG_BLACK} %s ${COLOR_NONE} \n" "$(_get_value "login" <<< "${userinfo}")"
+    printf "${COLOR_BG_BLACK} %s ${COLOR_NONE} \n" "$(_get_value "login" <<<"${userinfo}")"
     printf "\n"
 
-
-    printf " %s\n" "$(_get_value "bio" <<< ${userinfo})"
+    printf " %s\n" "$(_get_value "bio" <<<${userinfo})"
 
     _print_bar
 
-	for k in "${JSON_KEYS[@]}"; do
-		printf "${COLOR_FG_HIGHLIGHT} ${k} \033[m${INDICATOR} $(_get_value "${k}" <<< "${userinfo}")\n"
-	done
+    for k in "${JSON_KEYS[@]}"; do
+        printf "${COLOR_FG_HIGHLIGHT} ${k} \033[m${INDICATOR} $(_get_value "${k}" <<<"${userinfo}")\n"
+    done
 
     _print_bar
 }
@@ -76,7 +75,6 @@ function _print_info() {
 function _print_bar() {
     printf "${COLOR_FG_BLACK}=================================================${COLOR_NONE}\n"
 }
-
 
 function _main() {
     paste -d " " <(echo -e "${LOGO}") <(gh api "user" | _print_info)
