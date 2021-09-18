@@ -49,6 +49,10 @@ readonly JSON_KEYS=(
     "updated_at"
 )
 
+function _main() {
+    paste -d " " <(echo -e "${LOGO}") <(gh api "user" | _print_info)
+}
+
 function _get_value() {
     jq -r ".${1}" </dev/stdin
 }
@@ -74,10 +78,6 @@ function _print_info() {
 
 function _print_bar() {
     echo -e "${COLOR_FG_BLACK}=================================================${COLOR_NONE}"
-}
-
-function _main() {
-    paste -d " " <(echo -e "${LOGO}") <(gh api "user" | _print_info)
 }
 
 _main "${@}"
