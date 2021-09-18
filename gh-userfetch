@@ -5,7 +5,7 @@ set -o errexit
 
 readonly COLOR_BG_BLACK="\033[40;1m"
 readonly COLOR_FG_BLACK="\033[30m"
-readonly COLOR_FG_HIGHLIGHT="\033[36;1m"
+readonly COLOR_FG_HIGHLIGHT="\033[34;1m"
 readonly COLOR_NONE="\033[m"
 readonly INDICATOR="➤"
 
@@ -87,7 +87,7 @@ function _print_color_bar() {
 
     for i in "" ";1"; do
         for j in $(seq 1 7); do
-            printf " \e[4${j}${i}m     \e[m"
+            printf " \033[4${j}${i}m     \033[m"
         done
         echo -e "\n"
     done
