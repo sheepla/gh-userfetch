@@ -74,10 +74,25 @@ function _print_info() {
     done
 
     _print_bar
+
+    _print_color_bar
 }
 
 function _print_bar() {
     echo -e "${COLOR_FG_BLACK}=================================================${COLOR_NONE}"
+}
+
+function _print_color_bar() {
+    echo -e ""
+
+    for i in "" ";1"; do
+        for j in $(seq 1 7); do
+            printf " \e[4${j}${i}m     \e[m"
+        done
+        echo -e "\n"
+    done
+
+    echo -e ""
 }
 
 _main "${@}"
