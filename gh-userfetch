@@ -86,8 +86,8 @@ function _print_color_bar() {
     echo -e ""
 
     for i in "" ";1"; do
-        for j in $(seq 1 7); do
-            printf " \033[4${j}${i}m     \033[m"
+        for j in $(seq 0 7); do
+            printf " \033[4${j}${i}m    \033[m"
         done
         echo -e "\n"
     done
